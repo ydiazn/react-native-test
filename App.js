@@ -10,7 +10,9 @@ import { AuthenticationProvider } from "./providers/";
 export default function App() {
   return (
     <AuthenticationProvider>
+      <SafeAreaProvider>
         <RootNavigator />
+      </SafeAreaProvider>
     </AuthenticationProvider>
   );
 }

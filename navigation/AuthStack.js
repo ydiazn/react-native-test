@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 export default function AuthStack(){
   return (
     <Stack.Navigator
-      //screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name='Login'
