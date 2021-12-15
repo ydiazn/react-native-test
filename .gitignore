@@ -1,0 +1,28 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+# Environment file
+.env
+
+# Firebase
+.firebaserc
+firebase-debug.log
+firebase.json
+firestore-debug.log
+
+# Others
+ui-debug.log
+yarn-error.log
+yarn.lock
