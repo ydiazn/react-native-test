@@ -62,9 +62,5 @@ const styles = {
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
-  button: {
-    fontSize: 20,
-    padding: 20,
-  }
 }
 
