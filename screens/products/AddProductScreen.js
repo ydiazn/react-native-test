@@ -41,7 +41,7 @@ export default function AddProductScreen({navigation}) {
     try {
       await addDoc(ref, {...values});
       setIssubmiting(false);
-      navigation.navigate("ProductScreen")
+      navigation.navigate("ProductHome")
     } catch(e) {
       console.log(e.message);
     }

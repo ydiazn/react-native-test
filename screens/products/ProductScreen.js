@@ -11,7 +11,7 @@ export default function ProductScreen({ navigation }){
       <Products renderView={ProductView} />
       <Button
         title="Add a product"
-        onPress={() => navigation.navigate("AddProductScreen")}
+        onPress={() => navigation.navigate("AddProduct")}
       />
     </View>
   );

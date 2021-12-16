@@ -7,16 +7,18 @@ import { AddProductScreen, ProductScreen } from '../screens/products/';
 const Stack = createStackNavigator();
 
 
-export default function AppStack() {
+export default function ProductNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialrouteName="ProductHome">
       <Stack.Screen
-        name='ProductScreen'
+        name='ProductHome'
         component={ProductScreen}
-        options={{title: "Products"}}
+        options={{
+          title: "Products",
+        }}
       />
       <Stack.Screen
-        name='AddProductScreen'
+        name='AddProduct'
         component={AddProductScreen}
         options={{title: "Add a product"}}
       />
