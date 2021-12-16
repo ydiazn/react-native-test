@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import ProductNavigator from "./ProductNavigator";
-import HomeScreen from '../screens/HomeScreen.js';
+import FlickrNavigator from "./FlickrNavigation.js";
+import HomeScreen from "../screens/HomeScreen.js";
 
 
 const Tab = createBottomTabNavigator();
@@ -22,6 +23,8 @@ export default function MainNavigator(){
           } 
           else if (route.name === 'Products') {
             iconName = 'shopping-cart'
+          } else if (route.name === 'Photos'){
+            iconName = "photo";
           }
 
           return <FontAwesome name={iconName} size={size} color={color} />;
@@ -43,6 +46,10 @@ export default function MainNavigator(){
       <Tab.Screen
         name="Products"
           component={ProductNavigator}
+      />
+      <Tab.Screen
+        name="Photos"
+          component={FlickrNavigator}
       />
     </Tab.Navigator>
   );

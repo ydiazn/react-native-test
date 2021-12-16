@@ -7,6 +7,10 @@ export default ({config}) => {
     ...config,
     extra: {
       environment: process.env.ENVIRONMENT,
+      flickr: {
+        apiUrl: process.env.FLICKR_API_URL,
+        apiKey: process.env.FLICKR_API_KEY,
+      },
       google: {
         webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
       },
