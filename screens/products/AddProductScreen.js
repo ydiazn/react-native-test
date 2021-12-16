@@ -67,6 +67,7 @@ export default function AddProductScreen({navigation}) {
           handleBlur
         }) => (
           <>
+            <ErrorMessage errorValue={touched.name && errors.name} />
             <TextInput
               style={styles.input}
               numberOfLines={1}
@@ -76,7 +77,7 @@ export default function AddProductScreen({navigation}) {
               autoCapitalize="none"
               onBlur={handleBlur('name')}
             />
-            <ErrorMessage errorValue={touched.name && errors.name} />
+            <ErrorMessage errorValue={touched.price && errors.price} />
             <TextInput
               style={styles.input}
               numberOfLines={1}
@@ -86,7 +87,6 @@ export default function AddProductScreen({navigation}) {
               autoCapitalize="none"
               onBlur={handleBlur('price')}
             />
-            <ErrorMessage errorValue={touched.price && errors.price} />
             <View style={styles.buttonContainer}> 
               <Button
               title="Submit"
@@ -104,7 +104,7 @@ export default function AddProductScreen({navigation}) {
 
 const styles = StyleSheet.create({
   errorContainer: {
-    marginVertical: 5
+    marginVertical: 5,
   },
   errorText: {
     color: 'red'
