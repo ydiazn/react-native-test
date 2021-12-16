@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   ActivityIndicator,
   Button,
@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { collection, addDoc } from "firebase/firestore";
 
 import { db } from "../../config/firebase/";
+import { AuthenticationContext } from "../../providers/";
 
 
 const validationSchema = Yup.object().shape({
@@ -24,6 +25,9 @@ const validationSchema = Yup.object().shape({
     .required('Please enter a price')
 });
 
+const networkErrorMessage = `A network error has been produced during product creation.
+  Check your network connection and try again.`
+
 const ErrorMessage = ({ errorValue }) => (
   <View style={styles.errorContainer}>
     <Text style={styles.errorText}>{errorValue}</Text>
@@ -31,6 +35,7 @@ const ErrorMessage = ({ errorValue }) => (
 );
 
 export default function AddProductScreen({navigation}) {
+  const { user } = useContext(AuthenticationContext);
   const [ error, setError ] = useState('');
   const [ isSubmiting, setIssubmiting ] = useState(false);
   const ref = collection(db, "products");
@@ -39,11 +44,13 @@ export default function AddProductScreen({navigation}) {
     setIssubmiting(true);
 
     try {
-      await addDoc(ref, {...values});
-      setIssubmiting(false);
+      await addDoc(ref, {user:user.uid, ...values});
       navigation.navigate("ProductHome")
     } catch(e) {
       console.log(e.message);
+      setError(networkErrorMessage);
+    } finally {
+      setIssubmiting(false);
     }
   }
 
