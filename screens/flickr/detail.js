@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { ImageBackground, StyleSheet, TouchableHighlight, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { SafeView } from "../../components/"
 import { useSelector } from 'react-redux';
 import { recentPhotoSelector } from "../../features/flickr/recentPhotoSlice.js";
 
@@ -11,66 +13,41 @@ export default function DetailScreen({route, navigation}) {
     const { photos } = useSelector(recentPhotoSelector);
 
     const current = photos.find((photo) => {
-        return photo.id == photoId;
+      return photo.id == photoId;
     });
-    
-    React.useLayoutEffect(() => {
-      navigation.setOptions({
-        headerRight: () => (
-          <RightHeader {...{photoId}} />
-        ),
-      });
-    }, [navigation]);
-
+     
     return (
-        <View style={styles.container}>
-          <View style={styles.container}>
-            <Image
-              style={styles.image}
-              source={{uri: current.url}
-            }/>
-          </View>
-          <View style={styles.header}>
-            <Text style={styles.title}>{current.title}</Text>
-          </View>
-        </View>
+      <SafeView style={styles.container}>
+        <ImageBackground
+          resizeMode="contain"
+          style={styles.image}
+          source={{uri: current.url}}
+        >
+          <TouchableHighlight
+            onPress={() => navigation.goBack()}
+          >
+            <View style={styles.button}>
+              <Icon name="times" size={20} color="white" />
+            </View>
+          </TouchableHighlight>
+        </ImageBackground>
+      </SafeView>
     );
 }
 
-
-function RightHeader({photoId}){
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.rightHeader}>
-      <Button
-        title='Info'
-        onPress={() => {
-          navigation.navigate('FlickrPhotoInfo', {photoId})
-        }}
-      >Info
-      </Button>
-    </View>
-  )
-}
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
     },
     image: {
-      resizeMode: 'contain',
-      ...StyleSheet.absoluteFillObject,
+      flex: 1,
     },
-    header: {
-      opacity: 0.6,
-      padding: 10,
-      backgroundColor: 'black',
-    },
-    rightHeader: {
-      padding: 5,
-    },
-    title: {
-      color: 'white',
+  button: {
+      padding: 15,
+      backgroundColor: "#222222",
+      alignItems: "flex-end",
+      opacity: 0.4,
     }
- });
+});
+

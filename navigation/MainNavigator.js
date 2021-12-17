@@ -35,7 +35,11 @@ export default function MainNavigator() {
       <Stack.Screen
         name='FlickrPhotoDetail'
         component={PhotoDetailScreen}
-        options={{title: "Photo detail"}}
+        options={{
+          title: "Photo detail",
+          presentation: "modal",
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name='FlickrPhotoInfo'
