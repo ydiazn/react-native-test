@@ -1,21 +1,55 @@
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-import { MapHomeScreen } from "../screens/";
-import ProductNavigator from "./ProductNavigator";
-import FlickrNavigator from "./FlickrNavigation.js";
-import HomeScreen from "../screens/HomeScreen.js";
+import { ProductScreen, AddProductScreen } from "../screens/products/";
+import MapHomeScreen from "../screens/map/home.js";
+import {
+  FlickrHomeScreen,
+  PhotoDetailScreen,
+  PhotoInfoScreen,
+} from "../screens/flickr/";
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 
-export default function MainNavigator(){ 
+
+export default function MainNavigator() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name='Home'
+        component={TabNavigator}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name='AddProduct'
+        component={AddProductScreen}
+        options={{title: "Add a product"}}
+      />
+      <Stack.Screen
+        name='FlickrPhotoDetail'
+        component={PhotoDetailScreen}
+        options={{title: "Photo detail"}}
+      />
+      <Stack.Screen
+        name='FlickrPhotoInfo'
+        component={PhotoInfoScreen}
+        options={{title: "Photo info"}}
+      />
+    </Stack.Navigator>
+  );
+};
+
+
+function TabNavigator(){
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Products"
       screenOptions={({route}) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -35,28 +69,21 @@ export default function MainNavigator(){
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
-        headerShown: false,
+        //headerShown: false,
       })}
     >
       <Tab.Screen
-        options={{
-          title: "Home",
-          headerShown: false
-        }}
-        name="Home"
-        component={HomeScreen}
-      />
-      <Tab.Screen
         name="Products"
-          component={ProductNavigator}
+        component={ProductScreen}
       />
-      <Tab.Screen
+    <Tab.Screen
         name="Photos"
-          component={FlickrNavigator}
+        component={FlickrHomeScreen}
+        options={{title: "Flickr recent photos"}}
       />
       <Tab.Screen
         name="Map"
-          component={MapHomeScreen}
+        component={MapHomeScreen}
       />
     </Tab.Navigator>
   );

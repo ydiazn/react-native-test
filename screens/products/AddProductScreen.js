@@ -45,7 +45,7 @@ export default function AddProductScreen({navigation}) {
 
     try {
       await addDoc(ref, {user:user.uid, ...values});
-      navigation.navigate("ProductHome")
+      navigation.navigate("Products")
     } catch(e) {
       console.log(e.message);
       setError(networkErrorMessage);
