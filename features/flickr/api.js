@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 
 const fetchRecentPhotos = async ({perPage}) => {
   const { flickr } = Constants.manifest.extra;
-  const { apiUrl, apiKey } from flickr;
+  const { apiUrl, apiKey } = flickr;
 
   const url = `${apiUrl}?method=flicr.photos.getRecent&
     api_key=${apiKey}&
