@@ -10,7 +10,6 @@ import MapHomeScreen from "../screens/map/home.js";
 import {
   FlickrHomeScreen,
   PhotoDetailScreen,
-  PhotoInfoScreen,
 } from "../screens/flickr/";
 
 
@@ -40,11 +39,6 @@ export default function MainNavigator() {
           presentation: "modal",
           headerShown: false,
         }}
-      />
-      <Stack.Screen
-        name='FlickrPhotoInfo'
-        component={PhotoInfoScreen}
-        options={{title: "Photo info"}}
       />
     </Stack.Navigator>
   );
