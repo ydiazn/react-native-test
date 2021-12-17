@@ -5,7 +5,7 @@ const fetchRecentPhotos = async ({perPage}) => {
   const { flickr } = Constants.manifest.extra;
   const { apiUrl, apiKey } = flickr;
 
-  const url = `${apiUrl}?method=flicr.photos.getRecent&
+  const url = `${apiUrl}?method=flickr.photos.getRecent&
     api_key=${apiKey}&
     per_page=${perPage}&
     format=json&
