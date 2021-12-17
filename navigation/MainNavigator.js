@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
+import SecondaryNavigator from "./SecondaryNavigator.js";
 import { ProductScreen, AddProductScreen } from "../screens/products/";
 import MapHomeScreen from "../screens/map/home.js";
 import {
@@ -62,6 +63,8 @@ function TabNavigator(){
             iconName = "photo";
           } else if (route.name == "Map") {
             iconName =  "map";
+          } else {
+            iconName = "bars";
           }
 
           return <FontAwesome name={iconName} size={size} color={color} />;
@@ -69,7 +72,6 @@ function TabNavigator(){
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
-        //headerShown: false,
       })}
     >
       <Tab.Screen
@@ -84,6 +86,11 @@ function TabNavigator(){
       <Tab.Screen
         name="Map"
         component={MapHomeScreen}
+      />
+      <Tab.Screen
+        name="Others"
+        component={SecondaryNavigator}
+        options={{headerShown: false}}
       />
     </Tab.Navigator>
   );
