@@ -3,6 +3,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
+import { MapHomeScreen } from "../screens/";
 import ProductNavigator from "./ProductNavigator";
 import FlickrNavigator from "./FlickrNavigation.js";
 import HomeScreen from "../screens/HomeScreen.js";
@@ -25,6 +26,8 @@ export default function MainNavigator(){
             iconName = 'shopping-cart'
           } else if (route.name === 'Photos'){
             iconName = "photo";
+          } else if (route.name == "Map") {
+            iconName =  "map";
           }
 
           return <FontAwesome name={iconName} size={size} color={color} />;
@@ -50,6 +53,10 @@ export default function MainNavigator(){
       <Tab.Screen
         name="Photos"
           component={FlickrNavigator}
+      />
+      <Tab.Screen
+        name="Map"
+          component={MapHomeScreen}
       />
     </Tab.Navigator>
   );
