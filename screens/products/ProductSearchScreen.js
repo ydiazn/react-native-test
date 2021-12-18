@@ -1,7 +1,9 @@
 import React from "react";
 import { useContext, useLayoutEffect, useState } from "react";
-import { View, ScrollView, Text }  from "react-native";
+import { TouchableOpacity, View, ScrollView, Text }  from "react-native";
 import { ActivityIndicator } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import { AuthenticationContext } from "../../providers/";
 
@@ -14,24 +16,57 @@ export default function ProductSearchScreen({navigation, route}){
   const  { user } = useContext(AuthenticationContext);
   const [ isLoading, setIsLoading ] = useState(false); 
   const [ products, setProducts ] = useState(initialProducts);
+  const [ q, setQ ] = useState("");
+  const [ searchFieldIsEmpty, setSearchFieldIsEmpty ] = useState(true);
+  
 
-  function onChange(q) {
+  function filter(value) {
     setIsLoading(true);
-    const filtered = products.filter((item) => {
+
+    const filtered = initialProducts.filter((item) => {
+      const query = value.trim().toLowerCase();
       const { name } = item
-      const transform = name.trim().toLowerCase();
-      return transform.includes(q);
+
+      return name.trim()
+        .toLowerCase()
+        .includes(query);
     })
     setProducts(filtered);
     setIsLoading(false);
   }
 
-  
+  function onChange(q){
+    setQ(q);
+    setSearchFieldIsEmpty(q? false: true);
+    filter(q);
+  }
+
+  function clear() {
+    const q = "";
+    setQ(q);
+    setSearchFieldIsEmpty(true);
+    filter(q);
+  }
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: (props) => <SearchBar {...props} onChange={onChange} />
+      headerTitle: (props) => (
+        <SearchBar
+          {...props}
+          onChange={onChange}
+          value={q}
+        />
+      ),
+      headerRight: () => (!searchFieldIsEmpty &&
+        <TouchableOpacity
+          style={styles.headerButtonContainer}
+          onPress={ clear }
+        >
+          <Icon name="times" size={20} color="black" />
+        </TouchableOpacity>
+      )
     })
-  }, [navigation])
+  }, [navigation, q, setSearchFieldIsEmpty])
   
   return (
     <View style={styles.container}>
@@ -63,6 +98,10 @@ const styles = {
   },
   searchButton: {
     paddingRight: 20,
+  },
+  headerButtonContainer: {
+    marginRight: 20,
+    padding: 20,
   }
 }
 
