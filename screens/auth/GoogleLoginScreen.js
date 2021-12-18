@@ -2,8 +2,13 @@ import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { ResponseType } from 'expo-auth-session';
 import * as Google from 'expo-auth-session/providers/google';
+import * as Facebook from 'expo-auth-session/providers/facebook';;
 import { Button, Text, View } from 'react-native';
-import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithCredential
+} from "firebase/auth";
 
 import { auth } from "../../config/firebase/";
 import { extraConfig } from "../../config/";
@@ -13,22 +18,40 @@ import { SafeView } from "../../components";
 WebBrowser.maybeCompleteAuthSession();
 
 
-export default function GoogleLoginScreen() {
-  const { webClientId } = extraConfig.google;
+function watchResponse(response, provider) {
+  if (response?.type === 'success') {
+    const { id_token } = response.params;
+    console.log(id_token)
+    const credential = provider.credential(id_token);
+    signInWithCredential(auth, credential);
+  }
+}
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
-    {
-      clientId: webClientId,
-    },
+
+export default function GoogleLoginScreen() {
+  const { webClientId:googleWebClientId } = extraConfig.google; 
+  const { webClientId:facebookWebClientID } = extraConfig.facebook; 
+
+  const [gRequest, gResponse, gPromptAsync] = Google.useIdTokenAuthRequest({
+    clientId: googleWebClientId
+  });
+  
+  const [fRequest, fResponse, fPromptAsync] = Facebook.useAuthRequest({
+    responseType: ResponseType.Token,
+    clientId: facebookWebClientID,
+  });
+
+  // Google
+  React.useEffect(
+    () => watchResponse(gResponse, GoogleAuthProvider), 
+    [gResponse]
   );
 
-  React.useEffect(() => {
-    if (response?.type === 'success') {
-      const { id_token } = response.params;
-      const credential = GoogleAuthProvider.credential(id_token);
-      signInWithCredential(auth, credential);
-    }
-  }, [response]);
+  // Facebook
+  React.useEffect(
+    () => watchResponse(fResponse, FacebookAuthProvider), 
+    [fResponse]
+  );
 
   return (
     <>
@@ -40,9 +63,17 @@ export default function GoogleLoginScreen() {
         style={styles.button}
         title="Google Sign in"
         onPress={() => {
-          promptAsync();
+          gPromptAsync();
         }}
       />
+      <Button
+        style={styles.button}
+        title="Facebook sign in"
+        onPress={() => {
+          fPromptAsync();
+        }}
+      />
+
     </View>
     </>
   );

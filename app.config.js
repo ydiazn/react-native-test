@@ -14,6 +14,10 @@ export default ({config}) => {
       google: {
         webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
       },
+      facebook: {
+        webClientId: process.env.FACEBOOK_WEB_CLIENT_ID,
+      },
+
       firebase: {
         config: {
           apiKey: process.env.API_KEY,

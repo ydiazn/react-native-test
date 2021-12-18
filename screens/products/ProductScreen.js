@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { ActivityIndicator } from 'react-native';
 import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 
-import { db } from '../../config/firebase/';
+import { auth, db } from '../../config/firebase/';
 import { AuthenticationContext } from "../../providers/";
 
 import { ProductView } from "../../components/products";
@@ -40,6 +40,16 @@ export default function ProductScreen({ navigation }){
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
+        <>
+        <TouchableOpacity
+          onPress={() => {
+            auth.signOut();
+          }}
+        >
+          <View style={styles.searchButton}>
+            <Icon name="user" size={20} color="black" />
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("ProductSearch", {
@@ -51,6 +61,7 @@ export default function ProductScreen({ navigation }){
             <Icon name="search" size={20} color="black" />
           </View>
         </TouchableOpacity>
+        </>
       ),
     });
   }, [navigation, products]);
