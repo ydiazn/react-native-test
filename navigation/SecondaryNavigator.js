@@ -30,7 +30,11 @@ export default function SecondaryNavigator() {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen name="Text" component={TextScreen} />
+      <Tab.Screen
+        name="Text"
+        component={TextScreen}
+        options={{title: "Large text"}}
+      />
       <Tab.Screen name="Links" component={LinkScreen} />
     </Tab.Navigator>
   );

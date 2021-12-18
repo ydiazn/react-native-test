@@ -15,7 +15,6 @@ export default function TextScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.h1}>Large text with scroll </Text>
         <ScrollView style={styles.scrollText}>
           <Text style={styles.text}>{text}</Text>
         </ScrollView>
