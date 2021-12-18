@@ -7,6 +7,5 @@
  */
 
 import ProductView from './ProductView';
-import Products from './Products';
 
-export {Products, ProductView}
+export {ProductView}

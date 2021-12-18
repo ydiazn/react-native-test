@@ -11,7 +11,7 @@ import { Text, View } from 'react-native';
 
 
 export default function ProductItem({item}) {
-  const { name, price } = item.data();
+  const { name, price } = item;
 
   return (
     <View style={styles.container}>

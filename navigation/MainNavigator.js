@@ -5,8 +5,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import SecondaryNavigator from "./SecondaryNavigator.js";
-import { ProductScreen, AddProductScreen } from "../screens/products/";
 import MapHomeScreen from "../screens/map/home.js";
+import {
+  ProductScreen,
+  AddProductScreen,
+  ProductSearchScreen,
+} from "../screens/products/";
 import {
   FlickrHomeScreen,
   PhotoDetailScreen,
@@ -30,6 +34,10 @@ export default function MainNavigator() {
         name='AddProduct'
         component={AddProductScreen}
         options={{title: "Add a product"}}
+      />
+      <Stack.Screen
+        name='ProductSearch'
+        component={ProductSearchScreen}
       />
       <Stack.Screen
         name='FlickrPhotoDetail'
