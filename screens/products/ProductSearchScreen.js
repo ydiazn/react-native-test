@@ -1,36 +1,35 @@
 import React from "react";
-import { useContext, useLayoutEffect, useEffect, useState } from "react";
-import {View, ScrollView, Text }  from "react-native";
+import { useContext, useLayoutEffect, useState } from "react";
+import { View, ScrollView, Text }  from "react-native";
 import { ActivityIndicator } from 'react-native';
-import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 
-import { db } from '../../config/firebase/';
 import { AuthenticationContext } from "../../providers/";
 
-import { Products, ProductView } from "../../components/products";
+import { ProductView } from "../../components/products";
 import { SearchBar } from "../../components/";
 
 
 export default function ProductSearchScreen({navigation, route}){
-  console.log(route)
   const { products:initialProducts } = route.params;
   const  { user } = useContext(AuthenticationContext);
   const [ isLoading, setIsLoading ] = useState(false); 
   const [ products, setProducts ] = useState(initialProducts);
 
   function onChange(q) {
+    setIsLoading(true);
     const filtered = products.filter((item) => {
       const { name } = item
       const transform = name.trim().toLowerCase();
       return transform.includes(q);
     })
     setProducts(filtered);
+    setIsLoading(false);
   }
 
   
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: (props) => <SearchBar {...props} onChange={onChange} />,
+      headerTitle: (props) => <SearchBar {...props} onChange={onChange} />
     })
   }, [navigation])
   
