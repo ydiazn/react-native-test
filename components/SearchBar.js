@@ -15,7 +15,6 @@ export default function SearchBar({onChange}) {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
         value={q}
         placeholder="Search"
         onChangeText={onChangeText}
@@ -33,8 +32,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  input: {
-    height: "40",
-  }
-});
+ });
 
