@@ -4,8 +4,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import TextScreen from '../screens/others/text';
-import LinkScreen from '../screens/others/link';
+import {LinkScreen, TextScreen, VideoScreen } from "../screens/others/";
 
 
 const Tab = createBottomTabNavigator();
@@ -22,6 +21,8 @@ export default function SecondaryNavigator() {
           } 
           else if (route.name === 'Links') {
             iconName = 'globe'
+          } else if (route.name == "Video"){
+            iconName = "film";
           }
 
           return <FontAwesome name={iconName} size={size} color={color} />;
@@ -30,6 +31,7 @@ export default function SecondaryNavigator() {
         tabBarInactiveTintColor: 'gray',
       })}
     >
+      <Tab.Screen name="Video" component={VideoScreen} />
       <Tab.Screen
         name="Text"
         component={TextScreen}

@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import SecondaryNavigator from "./SecondaryNavigator.js";
-import MapHomeScreen from "../screens/map/home.js";
+import { MapHomeScreen } from "../screens";
 import {
   ProductScreen,
   AddProductScreen,
@@ -69,7 +69,7 @@ function TabNavigator(){
             iconName = "photo";
           } else if (route.name == "Map") {
             iconName =  "map";
-          } else {
+          }  else {
             iconName = "bars";
           }
 
