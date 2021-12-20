@@ -92,6 +92,9 @@ function TabNavigator(){
       <Tab.Screen
         name="Map"
         component={MapHomeScreen}
+        options={{
+          headerShown: false,
+        }}
       />
       <Tab.Screen
         name="Others"

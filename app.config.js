@@ -1,10 +1,47 @@
 import 'dotenv/config';
 
 
-export default ({config}) => {
-
+export default () => {
   return {
-    ...config,
+    name: "react-native-test",
+    slug: "react-native-test",
+    version: "1.0.0",
+    orientation: "portrait",
+    icon: "./assets/icon.png",
+    scheme: "ypp",
+    splash: {
+      image: "./assets/splash.png",
+      resizeMode: "contain",
+      backgroundColor: "#ffffff"
+    },
+    updates: {
+      fallbackToCacheTimeout: 0
+    },
+    assetBundlePatterns: [
+      "**/*"
+    ],
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: "com.yenner.reactnativetest",
+      config: {
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      }
+    },
+    android: {
+      adaptiveIcon: {
+        foregroundImage: "./assets/adaptive-icon.png",
+        backgroundColor: "#FFFFFF"
+      },
+      package: "com.yenner.reactnativetest",
+      config: {
+        googleMaps: {
+          apiKey: process.env.GOOGLE_MAPS_API_KEY,
+        }
+      }
+    },
+    web: {
+      "favicon": "./assets/favicon.png"
+    },
     extra: {
       environment: process.env.ENVIRONMENT,
       flickr: {
@@ -13,6 +50,10 @@ export default ({config}) => {
       },
       google: {
         webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
+        mapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      },
+      tomtom: {
+        apiKey: process.env.TOMTOM_API_KEY,
       },
       firebase: {
         config: {
