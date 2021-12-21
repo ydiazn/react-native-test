@@ -1,17 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Image, ActivityIndicator, Dimensions, StyleSheet, Text, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 import { locationActions, locationSelector } from "../../features/map/locationSlice.js";
 
@@ -40,7 +32,9 @@ export default function Map() {
   }
   else if (location) {
     mapView = <MapView
-      style={styles.map} 
+      style={StyleSheet.absoluteFillObject}
+      mapType="hybrid"
+      provider={PROVIDER_GOOGLE}
       initialRegion={{
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
@@ -77,9 +71,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  map: {
-    width: 500,
-    height: 500,
   },
 });
