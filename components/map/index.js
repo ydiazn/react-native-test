@@ -1,6 +1,13 @@
 import Map from "./Map.js";
 import SearchItem from "./SearchItem";
-import SearchResultBox from "./SearchResults.js";
+import { SearchResultBox, SearchResult } from "./SearchResults.js";
+import AutocompleteSearch from "./AutocompleteSearch.js";
 
-export { Map, SearchItem, SearchResultBox }
+export {
+  AutocompleteSearch,
+  Map,
+  SearchItem,
+  SearchResultBox,
+  SearchResult
+}
 

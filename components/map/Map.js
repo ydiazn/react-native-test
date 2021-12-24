@@ -5,8 +5,6 @@ import { Image, ActivityIndicator, Dimensions, StyleSheet, Text, View } from 're
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
-import { locationActions, locationSelector } from "../../features/map/locationSlice.js";
-
 
 export default function Map() {
   const dispatch = useDispatch();

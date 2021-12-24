@@ -1,30 +1,51 @@
 import React from "react"
+import { useState } from "react";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
-function SearchResult({poi, address}) {
-  const { name } = poi;
-  const { freeformAddress } = address;
+function SearchResult({item, style, onPress}) {
+  const { name } = item.poi;
+  const { freeformAddress } = item.address;
+  const apply = style === "itemSelectd"? [styles.container, styles.itemSelected]: styles.container;
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text>{ name }</Text>
-      </View>
-      <Text>{ freeformAddress }</Text>
+    <View style={apply}>
+      <TouchableOpacity
+        onPress={() => onPress(item)}
+      >
+        <View>
+          <Text>{ name }</Text>
+        </View>
+        <Text>{ freeformAddress }</Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
 
-export default function SearchResultBox({results, onResultSelected}){
-  console.log(results);
+function SearchResultBox({data, itemComponent, onSelect }){
+  const [ overId, setOverId ] = useState(null);
+
+  function renderItem({ item }){
+    const itemStyle = item.id == overId? "itemSelectd": "item";
+    return itemComponent({
+      item,
+      style: itemStyle,
+      onPress: (item) => {
+        setOverId(item.id);
+        onSelect(item);
+      }
+    })
+  }
+
   return (
     <View style={styles.container}>
       <FlatList 
-        data={results}
-        renderItem={({item}) => <SearchResult {...item} />}
+        data={data}
+        renderItem={renderItem}
         keyExtractor={item => item.id}
+        extraData={overId}
+
       />
     </View>
   )
@@ -35,6 +56,12 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     padding: 10,
+    paddingHorizontal: 20,
   },
+  itemSelected: {
+    backgroundColor: "#eee",
+  }
 })
+
+export { SearchResult, SearchResultBox }
 
