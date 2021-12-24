@@ -13,7 +13,7 @@ const defaultAutocompleteParameters = {
 }
 
 const defaultSearchParameters = {
-  limit: 1,
+  limit: 10,
 }
 
 

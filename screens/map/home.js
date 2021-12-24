@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { locationActions, locationSelector } from "../../features/map/locationSlice.js";
 import { SafeView } from "../../components/";
-import { AutocompleteSearch, SearchItem, SearchResultBox } from "../../components/map/";
+import { AutocompleteSearch, Map, SearchItem, SearchResultBox } from "../../components/map/";
 import { autocompletePlacesSearch, placesSearch } from "../../features/map/api.js";
 
 
@@ -16,6 +16,13 @@ export default function MapScreen() {
   const dispatch = useDispatch();
   const { isLoading, permission, location, error } = useSelector(locationSelector);
   const { permissionRequested } = locationActions;
+  const [ initialLocation, setInitialLocation ] = useState(undefined);
+
+  function onResultSelected(result) {
+    const { lat:latitude, lon:longitude } = result.position;
+    console.log(`Place selectd at location: ${latitude} ${longitude}`);
+    setInitialLocation({latitude, longitude});
+  }
 
    // Fetching location
   useEffect(() => {
@@ -30,7 +37,7 @@ export default function MapScreen() {
     mapView = <SafeView style={styles.mainContainer}>
       <AutocompleteSearch
         location={location}
-        onResultSelected={result => console.log(result)}
+        onResultSelected={onResultSelected}
       />
     </SafeView>
   }
