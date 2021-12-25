@@ -76,6 +76,7 @@ export default function AutocompleteSearch(props) {
 
             return (
               <MapView.Marker
+                key={place.id}
                 coordinate={{latitude, longitude}}
                 title={name}
               >
