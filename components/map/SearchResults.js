@@ -6,7 +6,8 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native
 function SearchResult({item, style, onPress}) {
   const { name } = item.poi;
   const { freeformAddress } = item.address;
-  const apply = style === "itemSelectd"? [styles.container, styles.itemSelected]: styles.container;
+  const apply = style === "itemSelectd"? [styles.itemContainer, styles.itemSelected]: styles.itemContainer;
+  console.log(style)
 
   return (
     <View style={apply}>
@@ -55,8 +56,12 @@ function SearchResultBox({data, itemComponent, onSelect }){
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    padding: 10,
+    padding: 5,
     paddingHorizontal: 20,
+  },
+  itemContainer: {
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   itemSelected: {
     backgroundColor: "#eee",

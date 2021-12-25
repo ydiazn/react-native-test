@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#FAFAFA',
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 60,
   },
   mapContainer: {
     flex: 1,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     left: 10,
     position: 'absolute',
     right: 10,
-    top: 35,
+    top: 10,
     zIndex: 1,
     borderRadius: 20,
   },
