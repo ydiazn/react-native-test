@@ -21,7 +21,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 export default function LoginScreen() {
   const [ authCredential, setAuthCredential ] = useState(null);
-  const [ authError, setAuthError ] = useState({message: "asdjh asdkkj asd k ask k alskdj aslk askl jd asldk l alskd  lkasjdasjdasj"});
+  const [ authError, setAuthError ] = useState(null);
   const { webClientId:googleWebClientId } = extraConfig.google; 
   const { webClientId:facebookWebClientID } = extraConfig.facebook; 
 
