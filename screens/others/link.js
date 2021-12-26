@@ -7,10 +7,27 @@
  */
 
 import * as React from 'react';
-import { Linking, View, ScrollView, Text } from 'react-native';
+import { Button, Linking, View, ScrollView, Text } from 'react-native';
 
 import { text } from './text';
+import {
+  registerForPushNotificationsAsync,
+  sendPushNotification
+} from "../../notification.js";
 
+
+async function onSendPushNotification() {
+  const token = await registerForPushNotificationsAsync();
+  if (token) {
+    const message = {
+      sound: 'default',
+      title: 'Original Title',
+      body: 'And here is the body!',
+    };
+
+    sendPushNotification(token, message);
+  }
+}
 
 export default function LinkScreen() {
   return (
@@ -37,6 +54,7 @@ export default function LinkScreen() {
         >
           Send a message
         </Text>
+        <Button title="Send push notification" onPress={onSendPushNotification} />
       </View>
     </View>
   );

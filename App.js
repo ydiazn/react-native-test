@@ -7,13 +7,17 @@ import { Provider } from 'react-redux';
 import { RootNavigator } from "./navigation/";
 import { AuthenticationProvider } from "./providers/";
 import store from "./store.js"
+import { withPushNotifications } from "./components/";
+
+const NavigatorWithPushNotification = withPushNotifications(RootNavigator);
+
 
 export default function App() {
   return (
     <Provider store={store}>
       <AuthenticationProvider>
         <SafeAreaProvider>
-          <RootNavigator />
+          <NavigatorWithPushNotification />
         </SafeAreaProvider>
       </AuthenticationProvider>
     </Provider>
