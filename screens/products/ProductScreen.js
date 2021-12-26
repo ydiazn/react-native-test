@@ -39,30 +39,7 @@ export default function ProductScreen({ navigation }){
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <>
-        <TouchableOpacity
-          onPress={() => {
-            auth.signOut();
-          }}
-        >
-          <View style={styles.searchButton}>
-            <Icon name="user" size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("ProductSearch", {
-              products: products
-            })
-          }}
-        >
-          <View style={styles.searchButton}>
-            <Icon name="search" size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-        </>
-      ),
+      headerRight: () => ( <HeaderRight /> )
     });
   }, [navigation, products]);
 
@@ -75,6 +52,25 @@ export default function ProductScreen({ navigation }){
       />
     </View>
   );
+}
+
+
+function HeaderRight(){
+  return (
+    <View style={styles.headerRightContainer}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("ProductSearch", {
+            products: products
+          })
+        }}
+      >
+        <View style={styles.searchButton}>
+          <Icon name="search" size={20} color="black" />
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 
@@ -100,6 +96,9 @@ const styles = {
   },
   searchButton: {
     paddingRight: 20,
+  },
+  headerRightContainer: {
+    flexDirection: "row-reverse",
   }
 }
 

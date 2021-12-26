@@ -1,9 +1,10 @@
 import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
+import { auth } from "../config/firebase/"
 import SecondaryNavigator from "./SecondaryNavigator.js";
 import { MapHomeScreen } from "../screens";
 import {
@@ -28,7 +29,25 @@ export default function MainNavigator() {
       <Stack.Screen
         name='Home'
         component={TabNavigator}
-        options={{headerShown: false}}
+        options={
+          {
+            title: "React native test",
+            headerShown: true,
+            headerRight: () => (
+              <View style={styles.headerRightContainer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    auth.signOut();
+                  }}
+                >
+                  <View style={styles.searchButton}>
+                    <FontAwesome name="sign-out" size={20} color="black" />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )
+          }
+        }
       />
       <Stack.Screen
         name='AddProduct'
@@ -105,3 +124,14 @@ function TabNavigator(){
   );
 }
 
+
+const styles = StyleSheet.create({
+  headerRightContainer: {
+    flexDirection: "row-reverse",
+    flex: 1,
+    padding:10,
+    paddingLeft: 20,
+    justifyContent: "space-around",
+    alignItems: "center",
+  }
+})
