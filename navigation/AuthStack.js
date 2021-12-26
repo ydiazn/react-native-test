@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { GoogleLoginScreen } from '../screens/auth/';
+import { LoginScreen } from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +13,7 @@ export default function AuthStack(){
     >
       <Stack.Screen
         name='Login'
-        component={GoogleLoginScreen}
+        component={LoginScreen}
         options={{title: "Welcome to React Native Test"}}
     />
     </Stack.Navigator>
